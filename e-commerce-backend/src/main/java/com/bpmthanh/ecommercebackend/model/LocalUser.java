@@ -12,6 +12,8 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * User for authentication with our website.
  */
@@ -27,6 +29,7 @@ public class LocalUser {
     /** The username of the user. */
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+    @JsonIgnore
     /** The encrypted password of the user. */
     @Column(name = "password", nullable = false, length = 1000)
     private String password;
@@ -57,6 +60,7 @@ public class LocalUser {
      * rằng chỉ có các Address liên quan đến User mới được lưu trữ trong cơ sở dữ
      * liệu, và các Address không liên quan sẽ tự động bị xóa.
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 

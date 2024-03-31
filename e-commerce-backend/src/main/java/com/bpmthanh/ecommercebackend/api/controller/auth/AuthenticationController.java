@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import org.hibernate.mapping.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,5 +94,16 @@ public class AuthenticationController {
             CustomResponse<LoginResponse> customResponse = new CustomResponse<>(status, response, message);
             return ResponseEntity.ok(customResponse);
         }
+    }
+
+    /**
+     * Gets the profile of the currently logged-in user and returns it.
+     * 
+     * @param user The authentication principal object.
+     * @return The user profile.
+     */
+    @GetMapping("/me")
+    public LocalUser getLoggedInUserProfile(@AuthenticationPrincipal LocalUser user) {
+        return user;
     }
 }
