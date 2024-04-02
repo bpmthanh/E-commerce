@@ -1,7 +1,7 @@
 package com.bpmthanh.ecommercebackend.service;
 
 import com.bpmthanh.ecommercebackend.api.model.RegistrationBody;
-import com.bpmthanh.ecommercebackend.api.model.dao.LocalUserDAO;
+import com.bpmthanh.ecommercebackend.model.dao.LocalUserDAO;
 import com.bpmthanh.ecommercebackend.exception.UserAlreadyExistsException;
 import com.bpmthanh.ecommercebackend.model.LocalUser;
 import org.springframework.stereotype.Service;
@@ -52,10 +52,6 @@ public class UserService {
         return localUserDAO.save(user);
     }
 
-    public boolean verifyPassword(String inputPassword, String savedPassword) {
-        return inputPassword.equals(savedPassword);
-    }
-
     /**
      * Logins in a user and provides an authentication token back.
      * 
@@ -67,7 +63,7 @@ public class UserService {
         if (opUser.isPresent()) {
             LocalUser user = opUser.get();
             try {
-                if (verifyPassword(loginBody.getPassword(), user.getPassword())) {
+                if (encryptionService.verifyPassword(loginBody.getPassword(), user.getPassword())) {
                     return jwtService.generateJWT(user);
                 } else {
                     return "Invalid password";

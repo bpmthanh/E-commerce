@@ -14,3 +14,7 @@ Các mã lỗi
 400 Bad Request: Yêu cầu không hợp lệ hoặc không thể được xử lý.
 405 Method Not Allowed: Phương thức yêu cầu không được cho phép cho tài nguyên.
 408 Request Timeout: Thời gian chờ yêu cầu đã hết khi máy chủ không nhận được yêu cầu từ khách hàng
+
+git remote set-url origin git@github.com:bpmthanh/E-commerce.git
+git config --global user.email "ltvphuoctien@gmail.com"
+  git config --global user.name "bpmthanh"
