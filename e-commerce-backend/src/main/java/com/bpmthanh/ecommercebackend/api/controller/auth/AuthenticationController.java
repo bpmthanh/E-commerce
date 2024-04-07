@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.bpmthanh.ecommercebackend.exception.EmailFailureException;
+import com.bpmthanh.ecommercebackend.exception.UserNotVerifiedException;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Rest Controller for handling authentication requests.
@@ -66,6 +69,8 @@ public class AuthenticationController {
             String message = "User already exists!";
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new CustomResponse<>(HttpStatus.CONFLICT.value(), registrationBody, message));
+        } catch (EmailFailureException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -77,9 +82,24 @@ public class AuthenticationController {
      */
     @PostMapping("/login")
     public ResponseEntity<CustomResponse<LoginResponse>> loginUser(@Valid @RequestBody LoginBody loginBody) {
-        String jwt = userService.loginUser(loginBody);
         String message;
         int status;
+        String jwt = null;
+
+        try {
+            jwt = userService.loginUser(loginBody);
+        } catch (UserNotVerifiedException ex) {
+            LoginResponse response = new LoginResponse();
+            response.setSuccess(false);
+            String reason = "USER_NOT_VERIFIED";
+            if (ex.isNewEmailSent()) {
+                reason += "_EMAIL_RESENT";
+            }
+            response.setFailureReason(reason);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        } catch (EmailFailureException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
 
         if (jwt == null) {
             message = "Login failed!";
@@ -105,5 +125,21 @@ public class AuthenticationController {
     @GetMapping("/me")
     public LocalUser getLoggedInUserProfile(@AuthenticationPrincipal LocalUser user) {
         return user;
+    }
+
+    /**
+     * Post mapping to verify the email of an account using the emailed token.
+     * 
+     * @param token The token emailed for verification. This is not the same as a
+     *              authentication JWT.
+     * @return 200 if successful. 409 if failure.
+     */
+    @PostMapping("/verify")
+    public ResponseEntity verifyEmail(@RequestParam String token) {
+        if (userService.verifyUser(token)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 }
