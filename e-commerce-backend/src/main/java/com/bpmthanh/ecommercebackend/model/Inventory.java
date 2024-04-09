@@ -1,5 +1,7 @@
 package com.bpmthanh.ecommercebackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,6 +44,7 @@ public class Inventory {
      *                  product_id hợp lệ. unique = true chỉ ra rằng cột
      *                  "product_id" phải là duy nhất, không được trùng lặp.
      */
+    @JsonIgnore
     @OneToOne(optional = false, orphanRemoval = true)
     @JoinColumn(name = "product_id", nullable = false, unique = true)
     private Product product;

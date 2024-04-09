@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Address for the user to be billed/delivered to.
@@ -40,12 +41,14 @@ public class Address {
      * optional = false chỉ ra rằng mối quan hệ là bắt buộc, mỗi Address phải liên
      * kết với một LocalUser. Nếu không có LocalUser nào liên kết, sẽ xảy ra lỗi.
      * 
-     * @JoinColumn(name = "user_id", nullable = false) chỉ định rằng cột "user_id"
+     * @JoinColumn(name = "user_id", nullable = false) chỉ đsssssh rằng cột
+     *                  "user_id"
      *                  trong bảng Address sẽ được sử dụng làm khóa ngoại để liên
      *                  kết với cột khóa chính trong bảng LocalUser. nullable =
      *                  false chỉ ra rằng cột "user_id" không được để trống, tức là
      *                  mỗi Address phải có một giá trị user_id hợp lệ.
      */
+    @JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private LocalUser user;
