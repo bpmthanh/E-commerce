@@ -2,6 +2,8 @@ package com.bpmthanh.ecommercebackend.api.controller.auth;
 
 import com.bpmthanh.ecommercebackend.api.model.RegistrationBody;
 import com.bpmthanh.ecommercebackend.exception.UserAlreadyExistsException;
+import com.bpmthanh.ecommercebackend.exception.EmailFailureException;
+import com.bpmthanh.ecommercebackend.exception.UserNotVerifiedException;
 import com.bpmthanh.ecommercebackend.model.LocalUser;
 import com.bpmthanh.ecommercebackend.responseEntity.CustomResponse;
 import com.bpmthanh.ecommercebackend.service.UserService;
@@ -18,8 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bpmthanh.ecommercebackend.exception.EmailFailureException;
-import com.bpmthanh.ecommercebackend.exception.UserNotVerifiedException;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
