@@ -1,4 +1,5 @@
-Đây là mô tả các mã lỗi.
+<ins>Đây là mô tả các mã lỗi.</ins>
+
 | Mã lỗi | Mô tả                                                                |
 |--------|----------------------------------------------------------------------|
 | 200 OK | Yêu cầu thành công.                                                  |
@@ -17,7 +18,7 @@
 | 408 Request Timeout | Thời gian chờ yêu cầu đã hết khi máy chủ không nhận được yêu cầu từ khách hàng. |
 
 
-Đây là cách trình bày dễ đọc và hiểu trong một bảng Markdown.
+<ins>Đây là cách trình bày dễ đọc và hiểu trong một bảng Markdown.</ins>
 ```bash
 git remote set-url origin git@github.com:bpmthanh/E-commerce.git
 git config --global user.email "ltvphuoctien@gmail.com"
