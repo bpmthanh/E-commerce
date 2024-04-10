@@ -1,3 +1,4 @@
+Đây là mô tả các mã lỗi.
 | Mã lỗi | Mô tả                                                                |
 |--------|----------------------------------------------------------------------|
 | 200 OK | Yêu cầu thành công.                                                  |
@@ -15,8 +16,8 @@
 | 405 Method Not Allowed | Phương thức yêu cầu không được cho phép cho tài nguyên.         |
 | 408 Request Timeout | Thời gian chờ yêu cầu đã hết khi máy chủ không nhận được yêu cầu từ khách hàng. |
 
-Đây là cách trình bày dễ đọc và hiểu trong một bảng Markdown.
 
+Đây là cách trình bày dễ đọc và hiểu trong một bảng Markdown.
 ```bash
 git remote set-url origin git@github.com:bpmthanh/E-commerce.git
 git config --global user.email "ltvphuoctien@gmail.com"
