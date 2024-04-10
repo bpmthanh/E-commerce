@@ -6,7 +6,7 @@
 | 401 Unauthorized | Yêu cầu yêu cầu xác thực hoặc không có quyền truy cập.          |
 | 403 Forbidden | Yêu cầu bị từ chối do quyền truy cập.                             |
 | 404 Not Found | Tài nguyên không được tìm thấy.                                    |
-| 500 Internal Server Error | Lỗi không xác định xảy ra trên máy chủ.                      |
+| 500 Internal Server Error | Lỗi không xác định xảy ra trên máy chủ.                     |
 | 301 Moved Permanently | Tài nguyên đã được chuyển hướng vĩnh viễn đến một URL khác.   |
 | 302 Found | Tài nguyên đã được tìm thấy và chuyển hướng tạm thời đến một URL khác. |
 | 503 Service Unavailable | Máy chủ không khả dụng tạm thời, thường do quá tải hoặc bảo trì. |
